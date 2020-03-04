@@ -4,6 +4,9 @@ export default {
    ** Headers of the page
    */
   head: {
+    htmlAttrs: {
+      class: 'js',
+    },
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
@@ -14,7 +17,10 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://commondesign.demo.ahconu.org/themes/contrib/common_design/css/styles.css' }
+      ]
   },
   generate: {
     routes: function() {
@@ -38,7 +44,9 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/cd-dropdown.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */
