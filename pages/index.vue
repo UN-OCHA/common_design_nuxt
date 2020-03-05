@@ -136,6 +136,13 @@
 
     </header>
 
+    <main role="main" class="cd-container">
+      <a id="main-content" tabindex="-1"></a>
+      <div class="cd-layout-content">
+        <!-- content here -->
+      </div>
+    </main>
+
     <footer class="cd-footer" role="contentinfo">
       <div class="cd-container cd-footer__inner">
 
