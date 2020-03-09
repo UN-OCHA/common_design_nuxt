@@ -5,7 +5,7 @@ export default {
    */
   head: {
     htmlAttrs: {
-      class: 'js',
+      class: 'no-js',
     },
     title: process.env.npm_package_name || '',
     meta: [
@@ -45,7 +45,7 @@ export default {
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/cd-dropdown.js', ssr: false }
+    { src: '~/plugins/cd-dropdown.js', mode: 'client' }
   ],
   /*
    ** Nuxt.js dev-modules
