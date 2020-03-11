@@ -19,7 +19,8 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://commondesign.demo.ahconu.org/themes/contrib/common_design/css/styles.css' }
+      { rel: 'stylesheet', href: 'https://commondesign.demo.ahconu.org/themes/contrib/common_design/css/styles.css' },
+      { rel: 'stylesheet', href: 'https://raw.githubusercontent.com/UN-OCHA/common_design_system/cd-187-common-header-footer-components/cd-base.css' },
       ]
   },
   generate: {
@@ -36,7 +37,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#007faa' },
   /*
    ** Global CSS
    */
