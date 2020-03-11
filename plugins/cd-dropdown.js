@@ -1,26 +1,26 @@
 /**
  * Toggle the visibility of a dropdown.
  */
-function toggle(toggler, collapse) {
-  var element = toggler.nextElementSibling;
+function toggle (toggler, collapse) {
+  const element = toggler.nextElementSibling;
   if (element) {
-    var expanded = collapse || toggler.getAttribute('aria-expanded') === 'true';
+    const expanded = collapse || toggler.getAttribute('aria-expanded') === 'true';
 
     // Switch the expanded/collapsed states.
     toggler.setAttribute('aria-expanded', !expanded);
     element.setAttribute('data-cd-hidden', expanded);
 
     // Switch the labels.
-    var labelWrapper = toggler.querySelector('[data-cd-label-switch]');
+    const labelWrapper = toggler.querySelector('[data-cd-label-switch]');
     if (labelWrapper) {
-      var label = labelWrapper.getAttribute('data-cd-label-switch');
+      const label = labelWrapper.getAttribute('data-cd-label-switch');
       labelWrapper.setAttribute('data-cd-label-switch', labelWrapper.textContent);
       labelWrapper.textContent = label;
     }
 
     // Change the focus when expanded if a target is specified.
     if (element.hasAttribute('data-cd-focus-target') && !expanded) {
-      var target = this.document.getElementById(element.getAttribute('data-cd-focus-target'));
+      const target = this.document.getElementById(element.getAttribute('data-cd-focus-target'));
       if (target) {
         target.focus();
       }
@@ -31,29 +31,28 @@ function toggle(toggler, collapse) {
 /**
  * Collapse all dropdowns.
  */
- function collapseAll(exceptions) {
-   var elements = document.querySelectorAll('[aria-expanded="true"]');
-   exceptions = exceptions || [];
+function collapseAll (exceptions) {
+  const elements = document.querySelectorAll('[aria-expanded="true"]');
+  exceptions = exceptions || [];
 
-   elements.forEach(function (element) {
-     // Elements can be directed to stay open in two ways:
-     //  * We can apply an attribute directly in DOM
-     //  * We can mark it as an exception when calling this function
-     //
-     // If neither apply, then close the element.
-     if (!element.hasAttribute('data-cd-toggable-keep') && exceptions.indexOf(element) === -1) {
-       toggle(element, true);
-     }
-   });
- }
-
+  elements.forEach(function (element) {
+    // Elements can be directed to stay open in two ways:
+    //  * We can apply an attribute directly in DOM
+    //  * We can mark it as an exception when calling this function
+    //
+    // If neither apply, then close the element.
+    if (!element.hasAttribute('data-cd-toggable-keep') && exceptions.includes(element) === -1) {
+      toggle(element, true);
+    }
+  });
+}
 
 /**
  * Get the togglable parents of the toggler element.
  */
-function getToggableParents(element) {
-  var elements = [];
-  var body = document.body;
+function getToggableParents (element) {
+  const elements = [];
+  const body = document.body;
   while (element && element !== body) {
     if (element.hasAttribute && element.hasAttribute('data-cd-toggable')) {
       element = element.previousElementSibling;
@@ -71,8 +70,8 @@ function getToggableParents(element) {
 /**
 * Handle toggling of toggable elements.
 */
-function handleToggle(event) {
-  var target = event.currentTarget;
+function handleToggle (event) {
+  const target = event.currentTarget;
   if (target) {
     collapseAll(getToggableParents(target));
     toggle(target);
@@ -92,11 +91,11 @@ function handleToggle(event) {
  *
  * @see https://www.w3.org/WAI/WCAG21/Understanding/content-on-hover-or-focus.html
  */
-function handleEscape(event) {
-  var key = event.which || event.keyCode;
+function handleEscape (event) {
+  const key = event.which || event.keyCode;
   // Escape.
   if (key === 27) {
-    var target = event.currentTarget;
+    const target = event.currentTarget;
     // Toggable element, get the toggling button.
     if (!target.hasAttribute('data-cd-toggler')) {
       target = target.previousElementSibling;
@@ -112,14 +111,13 @@ function handleEscape(event) {
 /**
  * Handle global clicks outside of toggable elements, close them in this case.
  */
-function handleClickAway(event) {
-  var target = event.target;
+function handleClickAway (event) {
+  const target = event.target;
   if (target) {
     if (target.nodeName === 'A') {
       collapseAll();
-    }
-    else if (target.hasAttribute) {
-      var body = document.body;
+    } else if (target.hasAttribute) {
+      const body = document.body;
       while (target && target.hasAttribute && !target.hasAttribute('aria-expanded') && !target.hasAttribute('data-cd-hidden') && target !== body) {
         target = target.parentNode;
       }
@@ -133,15 +131,15 @@ function handleClickAway(event) {
 /**
  * Create a svg icon.
  */
-function createIcon(name, component, wrap) {
-  var svgElem = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  var useElem = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+function createIcon (name, component, wrap) {
+  const svgElem = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  const useElem = document.createElementNS('http://www.w3.org/2000/svg', 'use');
   useElem.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#cd-icon--' + name);
   svgElem.setAttribute('class', 'cd-icon cd-icon--' + name);
   svgElem.appendChild(useElem);
 
   if (component && wrap) {
-    var wrapper = document.createElement('span');
+    const wrapper = document.createElement('span');
     wrapper.setAttribute('class', component + '__logo');
     wrapper.appendChild(svgElem);
     return wrapper;
@@ -149,18 +147,17 @@ function createIcon(name, component, wrap) {
   return svgElem;
 }
 
-
 /**
  * Create a button to toggle a dropdown.
  */
-function createButton(element) {
-  var label = element.getAttribute('data-cd-toggable');
-  var logo = element.getAttribute('data-cd-logo');
-  var icon = element.getAttribute('data-cd-icon');
-  var component = element.getAttribute('data-cd-component');
+function createButton (element) {
+  const label = element.getAttribute('data-cd-toggable');
+  const logo = element.getAttribute('data-cd-logo');
+  const icon = element.getAttribute('data-cd-icon');
+  const component = element.getAttribute('data-cd-component');
 
   // Create the button.
-  var button = document.createElement('button');
+  const button = document.createElement('button');
   button.setAttribute('type', 'button');
 
   // Pre-label logo.
@@ -169,7 +166,7 @@ function createButton(element) {
   }
 
   // Button label.
-  var labelWrapper = document.createElement('span');
+  const labelWrapper = document.createElement('span');
   labelWrapper.appendChild(document.createTextNode(label));
   button.appendChild(labelWrapper);
 
@@ -197,21 +194,19 @@ function createButton(element) {
   return button;
 }
 
-
 /**
  * Transform the element into a dropdown menu.
  */
-function setToggable(element, toggler) {
-  var expand = element.hasAttribute('data-cd-toggable-expand') || false;
+function setToggable (element, toggler) {
+  const expand = element.hasAttribute('data-cd-toggable-expand') || false;
 
   // Create a button to toggle the element.
   if (!toggler) {
     toggler = createButton(element);
-  }
+  } else if (toggler.nodeName !== 'BUTTON') {
   // Or ensure the toggler has the "button" role.
   //
   // @todo ensure that `space` and `enter` trigger the toggling?
-  else if (toggler.nodeName !== 'BUTTON') {
     toggler.setAttribute('role', 'button');
   }
 
@@ -254,9 +249,9 @@ function setToggable(element, toggler) {
 /**
  * Initialize the toggable menus, adding a togggle button and event handling.
  */
-function initializeToggables() {
-  var elements = document.querySelectorAll('[data-cd-toggable]');
-  for (var i = 0, l = elements.length; i < l; i++) {
+function initializeToggables () {
+  const elements = document.querySelectorAll('[data-cd-toggable]');
+  for (const i = 0, l = elements.length; i < l; i++) {
     setToggable(elements[i]);
   }
 }
@@ -264,13 +259,13 @@ function initializeToggables() {
 /**
  * Update Drupal toggable nested menus.
  */
-function updateDrupalTogglableMenus(selector) {
+function updateDrupalTogglableMenus (selector) {
   // If selector wasn't supplied, set the default.
-  selector = typeof selector !== 'undefined' ? selector : '.cd-nav .menu a + .menu';
+  selector = typeof selector !== 'undefined' ? selector : '.cd-nav .menu button + .menu';
 
-  var elements = document.querySelectorAll(selector);
-  for (var i = 0, l = elements.length; i < l; i++) {
-    var element = elements[i];
+  const elements = document.querySelectorAll(selector);
+  for (const i = 0, l = elements.length; i < l; i++) {
+    const element = elements[i];
     this.setToggable(element, element.previousElementSibling);
   }
 }
@@ -279,7 +274,6 @@ function updateDrupalTogglableMenus(selector) {
  * Main logic.
  */
 if (document.documentElement.classList.contains('js')) {
-
   // Collapse popups when clicking outside of the toggable target.
   document.addEventListener('click', handleClickAway);
 
