@@ -1,5 +1,6 @@
 # 🏞 Nuxt & Netlify CMS Starter
 
+
 A lot of the starter repos for **Nuxt x Netlify CMS** use a module like `nuxtent` or `nuxtdown` to manage flat file content. This project is meant to be a solution for those who don't mind doing a little more configuration to not have to rely on these dependencies.
 
 ## 🎉 Getting Started
