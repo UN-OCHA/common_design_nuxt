@@ -1,0 +1,6 @@
+{
+  "date": "2020-03-12T16:32:40.753Z",
+  "title": "This is a new blog post",
+  "body": "This should trigger a deploy",
+  "description": "Test"
+}
